@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
 
   //abre o arquivo de entrada com os valores para serem somados
   arq = fopen(argv[1], "rb");
-  if(arq==NULL) { printf("--ERRO: fopen()\n"); exit(-1); }
+  if(arq==NULL) {printf("--ERRO: fopen()\n"); exit(-1); }
 
   //le o tamanho do vetor (primeira linha do arquivo)
   ret = fread(&n, sizeof(long int), 1, arq);
