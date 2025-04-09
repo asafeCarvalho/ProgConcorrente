@@ -2,26 +2,30 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-typedef struct argT
+typedef struct
 {
-    float* vetor1;
-    float* vetor2;
+    // float* vetor1;
+    // float* vetor2;
     int inicio, fim;
 } argT;
 
+float* vetor1;
+float* vetor2;
 
 void* ProdInterno(void* tArgs) {
-    argT* argumentos = (argT*) tArgs;
-    double produto = 0;
-    for (int i = argumentos->inicio; i < argumentos->fim; i++) {
-        produto += (argumentos->vetor1[i]) * (argumentos->vetor2[i]);
-    }
-    double* retorno = (double*) malloc(sizeof(double));
-    if (retorno != NULL) *retorno = produto;
-    else {printf("erro ao alocar espaço na memória\n"); exit(1);}
-    free(argumentos);
-    pthread_exit((void*) retorno);
-    exit(1);
+    // argT* argumentos = (argT*) tArgs;
+    // // printf("hello from thread! %d %d\n", argumentos->inicio, argumentos->fim);
+    // int i = argumentos->inicio;
+    // int fim = argumentos->fim;
+    // double produto = 0;
+    // for (; i < fim; i++) {
+    //     produto += (vetor1[i]) * (vetor2[i]);
+    // }
+    // double* retorno = (double*) malloc(sizeof(double));
+    // if (retorno != NULL) *retorno = produto;
+    // else {printf("erro ao alocar espaço na memória\n"); exit(1);}
+    // pthread_exit((void * ) retorno);
+    // exit(1);
 }
 
 int main(int argc, char** argv) {
@@ -40,8 +44,11 @@ int main(int argc, char** argv) {
     if (!ret) {printf("erro na leitura do arquivo"); return 0;}
 
 
-    float vetor1[tamanhoVetor];
-    float vetor2[tamanhoVetor];
+    // float vetor1[tamanhoVetor];
+    // float vetor2[tamanhoVetor];
+    vetor1 = (float *) malloc(sizeof(float) * tamanhoVetor);
+    vetor2 = (float *) malloc(sizeof(float) * tamanhoVetor);
+
     ret = fread(vetor1, sizeof(float), tamanhoVetor, arq);
     if (!ret) {printf("erro na leitura do arquivo"); return 0;}
     ret = fread(vetor2, sizeof(float), tamanhoVetor, arq);
@@ -52,16 +59,23 @@ int main(int argc, char** argv) {
     int bloco = tamanhoVetor / totalThreads;
 
     pthread_t* pids = (pthread_t *) malloc(sizeof(pid_t) * totalThreads);
+    argT** todosArgumentos = (argT**) malloc(sizeof(argT*) * totalThreads);
 
     for(int i = 0; i < totalThreads; i++){
-        argT* argumentos = (argT*) malloc(sizeof(argT));
-        argumentos->vetor1 = vetor1;
-        argumentos->vetor2 = vetor2;
-        argumentos->inicio= bloco * i;
-        argumentos->inicio= i + 1 == totalThreads ? tamanhoVetor : bloco * (i + 1);
-        pthread_create(&pids[i], NULL, ProdInterno, (void *) argumentos);
+        argT* args = (argT*) malloc(sizeof(argT));
+        if (args == NULL) {printf("malloc falhou!!!!!\n"); return 1;}
+        // argumentos->vetor1 = vetor1;
+        // argumentos->vetor2 = vetor2;
+        args->inicio= bloco * i;
+        args->fim= i + 1 == totalThreads ? tamanhoVetor : bloco * (i + 1);
+        printf("endereco argsT %d: %p\n", i, (void *) args);
+        todosArgumentos[i] = args;
+        if(pthread_create(&pids[i], NULL, ProdInterno, (void *) &args)) {
+            printf("error!!!! p_create\n\n");
+        };
     }
 
+    printf("\n\n");
     double respostaObtida = 0;
     double* retornoThread;
     for (int i = 0; i < totalThreads; i++) {
@@ -69,14 +83,17 @@ int main(int argc, char** argv) {
             printf("erro no join das threads\n");
             return 0;
         } 
-        respostaObtida += *retornoThread;
-        free(retornoThread);
+        // respostaObtida += *retornoThread;
+        // free(retornoThread);
+        printf("FREE argsT %d: %p\n", i, (void *) todosArgumentos[i]);
+
+        // if (i < 6) free((void*) todosArgumentos[i]);
     }
     double respostaCorreta;
     if (!fread(&respostaCorreta, sizeof(double), 1, arq)) {
         printf("erro ao ler o arquivo %s\n", argv[0]);
     };
     printf("resposta correta = %f\nresposta obtida = %f\n", respostaCorreta, respostaObtida);
-    free(pids);
+    // free(pids);
     return 1;
 }
