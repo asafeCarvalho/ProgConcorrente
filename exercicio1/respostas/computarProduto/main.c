@@ -15,7 +15,7 @@ int totalThreads;
 
 void* ProdInterno(void* tArgs) {
     argT* argumentos = (argT*) tArgs;
-    printf("hello from thread! %d %d %p\n", argumentos->inicio, argumentos->fim, (void *) argumentos);
+    // printf("hello from thread! %d %d %p\n", argumentos->inicio, argumentos->fim, (void *) argumentos);
     int i = argumentos->inicio;
     int fim = argumentos->fim;
     double produto = 0;
@@ -69,7 +69,7 @@ int main(int argc, char** argv) {
         // argumentos->vetor2 = vetor2;
         args->inicio= bloco * i;
         args->fim= i + 1 == totalThreads ? tamanhoVetor : bloco * (i + 1);
-        printf("endereco argsT %d: %p\n", i, (void *) args);
+        // printf("endereco argsT %d: %p\n", i, (void *) args);
         todosArgumentos[i] = args;
         if(pthread_create(&pids[i], NULL, ProdInterno, (void *) args)) {
             printf("error!!!! p_create\n\n");
@@ -86,15 +86,14 @@ int main(int argc, char** argv) {
         } 
         respostaObtida += *retornoThread;
         free(retornoThread);
-        printf("FREE argsT %d: %p\n", i, (void *) todosArgumentos[i]);
+        // printf("FREE argsT %d: %p\n", i, (void *) todosArgumentos[i]);
 
-        // if (i < 6) free((void*) todosArgumentos[i]);
     }
     double respostaCorreta;
     if (!fread(&respostaCorreta, sizeof(double), 1, arq)) {
         printf("erro ao ler o arquivo %s\n", argv[0]);
     };
-    printf("resposta correta = %f\nresposta obtida = %f\n", respostaCorreta, respostaObtida);
-    // free(pids);
+    printf("resposta sequencial = %f\nresposta concorrente = %f\nvariaçao relativa = %f\n", respostaCorreta,  respostaObtida, abs( (double)respostaCorreta - (double) respostaObtida) / (double)respostaCorreta);
+    free(pids);
     return 1;
 }
