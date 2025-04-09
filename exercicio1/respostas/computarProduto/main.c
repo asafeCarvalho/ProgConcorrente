@@ -11,20 +11,21 @@ typedef struct
 
 float* vetor1;
 float* vetor2;
+int totalThreads;
 
 void* ProdInterno(void* tArgs) {
-    // argT* argumentos = (argT*) tArgs;
-    // // printf("hello from thread! %d %d\n", argumentos->inicio, argumentos->fim);
-    // int i = argumentos->inicio;
-    // int fim = argumentos->fim;
-    // double produto = 0;
-    // for (; i < fim; i++) {
-    //     produto += (vetor1[i]) * (vetor2[i]);
-    // }
-    // double* retorno = (double*) malloc(sizeof(double));
-    // if (retorno != NULL) *retorno = produto;
-    // else {printf("erro ao alocar espaço na memória\n"); exit(1);}
-    // pthread_exit((void * ) retorno);
+    argT* argumentos = (argT*) tArgs;
+    printf("hello from thread! %d %d %p\n", argumentos->inicio, argumentos->fim, (void *) argumentos);
+    int i = argumentos->inicio;
+    int fim = argumentos->fim;
+    double produto = 0;
+    for (; i < fim; i++) {
+        produto += (vetor1[i]) * (vetor2[i]);
+    }
+    double* retorno = (double*) malloc(sizeof(double));
+    if (retorno != NULL) *retorno = produto;
+    else {printf("erro ao alocar espaço na memória\n"); exit(1);}
+    pthread_exit((void * ) retorno);
     // exit(1);
 }
 
@@ -70,7 +71,7 @@ int main(int argc, char** argv) {
         args->fim= i + 1 == totalThreads ? tamanhoVetor : bloco * (i + 1);
         printf("endereco argsT %d: %p\n", i, (void *) args);
         todosArgumentos[i] = args;
-        if(pthread_create(&pids[i], NULL, ProdInterno, (void *) &args)) {
+        if(pthread_create(&pids[i], NULL, ProdInterno, (void *) args)) {
             printf("error!!!! p_create\n\n");
         };
     }
@@ -83,8 +84,8 @@ int main(int argc, char** argv) {
             printf("erro no join das threads\n");
             return 0;
         } 
-        // respostaObtida += *retornoThread;
-        // free(retornoThread);
+        respostaObtida += *retornoThread;
+        free(retornoThread);
         printf("FREE argsT %d: %p\n", i, (void *) todosArgumentos[i]);
 
         // if (i < 6) free((void*) todosArgumentos[i]);
