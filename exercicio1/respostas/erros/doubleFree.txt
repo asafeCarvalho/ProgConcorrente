@@ -1,0 +1,7 @@
+hello from thread! 200 400
+hello from thread! 800 1000
+hello from thread! 400 600
+hello from thread! 0 200
+hello from thread! 600 800
+resposta correta = 2503433078459.500000
+resposta obtida = 2503433078459.500000
