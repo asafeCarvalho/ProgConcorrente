@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include "timer.h"
 
 typedef long long int lli;
 
@@ -48,6 +49,7 @@ void* primos_thread(void* args) {
 
 
 int main(int argc, char** argv) {
+    double inicio, fim, delta, total=0;
     int totalThreads;
     if (argc != 3) 
         erro_terminar("por favor, digite: \n./primos <quantidade de numeros> <quantidade de threads>\n");
@@ -56,7 +58,7 @@ int main(int argc, char** argv) {
     totalThreads = atoi(argv[2]);
     if (n == 0 || totalThreads == 0) erro_terminar("!!!inputs inválidos!!!\n");
 
-
+    GET_TIME(inicio);
     pthread_t tids[totalThreads];
 
     for (int i = 0; i < totalThreads; i++) {
@@ -70,8 +72,10 @@ int main(int argc, char** argv) {
             erro_terminar("erro ao dar join na thread\n\n");
         
     }
+    GET_TIME(fim);
 
-    printf("total primos %d\n", totalPrimos);
+
+    printf("%.6f\n", totalPrimos, fim - inicio);
     
 
 
