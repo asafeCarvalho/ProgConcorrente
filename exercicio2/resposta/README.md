@@ -1,3 +1,3 @@
 resultados
 
-![media](./media_por_thread.png)
+![media](./media_por_threads.png)
