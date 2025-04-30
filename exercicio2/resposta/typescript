@@ -174,4 +174,79 @@ Execuções completas. Resultados salvos em resultados.csv.
  21 done
  22 
  23 echo(B[m[31m (B[m[38;5;130m"(B[m[31mExecuções completas. Resultados salvos em (B[m[35m$CSV(B[m[31m.(B[m[38;5;130m"
- 24 [24A[?25h[?25l[47;51H(B[m~@k       [1;5H[?25h[?25l[47;51H   [46;44H(B[0;1;7m2,0-1[2;5H[?25h[?25l[47;51H(B[m~@k[2;5H[?25h[?25l[47;51H   [46;44H(B[0;1;7m3,1  [3;5H[?25h[?25l[47;51H(B[m~@k[3;5H[?25h[?25l[47;51H   [46;44H(B[0;1;7m4[4;5H[?25h[?25l[47;51H(B[m~@k[4;5H[?25h[?25l[47;51H   [46;44H(B[0;1;7m5[5;5H[?25h[?25l[47;51H(B[m~@k[5;5H[?25h[?25l[47;51H   [46;44H(B[0;1;7m6[6;5H[?25h[?25l[47;51H(B[m~@k[6;5H[?25h[?25l[47;51H   [46;44H(B[0;1;7m5[5;5H[?25h[?25l[47;51H(B[m~@ý[5;5H[?25h[?25l[47;51H   [46;46H(B[0;1;7m22[5;26H[?25h[?25l[47;51H(B[m~@k[5;26H[?25h[?25l[47;51H   [46;4
+ 24 [24A[?25h[?25l[47;51H(B[m~@k       [1;5H[?25h[?25l[47;51H   [46;44H(B[0;1;7m2,0-1[2;5H[?25h[?25l[47;51H(B[m~@k[2;5H[?25h[?25l[47;51H   [46;44H(B[0;1;7m3,1  [3;5H[?25h[?25l[47;51H(B[m~@k[3;5H[?25h[?25l[47;51H   [46;44H(B[0;1;7m4[4;5H[?25h[?25l[47;51H(B[m~@k[4;5H[?25h[?25l[47;51H   [46;44H(B[0;1;7m5[5;5H[?25h[?25l[47;51H(B[m~@k[5;5H[?25h[?25l[47;51H   [46;44H(B[0;1;7m6[6;5H[?25h[?25l[47;51H(B[m~@k[6;5H[?25h[?25l[47;51H   [46;44H(B[0;1;7m5[5;5H[?25h[?25l[47;51H(B[m~@ý[5;5H[?25h[?25l[47;51H   [46;46H(B[0;1;7m22[5;26H[?25h[?25l[47;51H(B[m~@k[5;26H[?25h[?25l[47;51H   [46;47H(B[0;1;7m1[5;25H[?25h[?25l[47;51H(B[m~@k[5;25H[?25h[?25l[47;51H   [46;47H(B[0;1;7m0[5;24H[?25h[?25l[47;51H(B[m~@k[5;24H[?25h[?25l[47;51H   [46;46H(B[0;1;7m19[5;23H[?25h[?25l[47;51H(B[m~@k[5;23H[?25h[?25l[47;51H   [46;47H(B[0;1;7m8[5;22H[?25h[?25l[47;51H(B[m~@k[5;22H[?25h[?25l[47;51H   [46;47H(B[0;1;7m7[5;21H[?25h[?25l[47;51H(B[m~@k[5;21H[?25h[?25l[47;51H   [46;47H(B[0;1;7m6[5;20H[?25h[?25l[47;51H(B[m~@k[5;20H[?25h[?25l[47;51H   [46;47H(B[0;1;7m5[5;19H[?25h[?25l[47;51H(B[m~@k[5;19H[?25h[?25l[47;51H   [46;47H(B[0;1;7m4[5;18H[?25h[?25l[47;51H(B[m~@k[5;18H[?25h[?25l[47;51H   [46;47H(B[0;1;7m3[5;17H[?25h[?25l[47;51H(B[mi[5;17H[?25h[?25l[47;51H ]112[6 q[5;17H[?25h[?25l[42B(B[0;1m-- INSERT --(B[m[K[?25h[?25l[5;17H[?25h[?25l[31m0(B[m         [34m# Quantidade fixa de números[46;11H(B[0;1;7m[+][33C4[5;18H[?25h[?25l(B[m[31m0(B[m         [34m# Quantidade fixa de números[46;47H(B[0;1;7m5[5;19H[?25h[?25l(B[m[31m0(B[m         [34m# Quantidade fixa de números[46;47H(B[0;1;7m6[5;20H[?25h[?25l(B[m[42B[12X[46;47H(B[0;1;7m5]112[2 q[5;19H[?25h[?25l[47;51H(B[m:[5;19H[?25h[?25l[47;51H [47;1H:]112[2 q[?25h[?25lw[?25h[?25lq[?25h[?25l[47;1H[?25h[?25l"script.sh"]112[2 q[?25h[?25l[C24L, 552B written[47;1H[?25h[?25l]112[2 q(B[m[?25h[?1l>[>4;0m[?1049l[23;0;0t[23;0t[?2004l[?1004l[?25h[?2004h]0;asafe@asafe-thinkpad: ~/Documents/git/ProgConcorrente/exercicio2/resposta[01;32masafe@asafe-thinkpad[00m:[01;34m~/Documents/git/ProgConcorrente/exercicio2/resposta[00m$ nvim script.sh [C[C[C[C[C[C[C[C[C[C[C[C[C[4P./script.shgcc -o primos primos.c -lm[C[C[C[C[C[C[C[C[C[C[C[C[C[15P./script.sh
+[?2004lExecutando para 1 threads...
+Executando para 2 threads...
+Executando para 4 threads...
+Executando para 8 threads...
+Execuções completas. Resultados salvos em resultados.csv.
+[?2004h]0;asafe@asafe-thinkpad: ~/Documents/git/ProgConcorrente/exercicio2/resposta[01;32masafe@asafe-thinkpad[00m:[01;34m~/Documents/git/ProgConcorrente/exercicio2/resposta[00m$ code resultados.csv 
+[?2004l[?2004h]0;asafe@asafe-thinkpad: ~/Documents/git/ProgConcorrente/exercicio2/resposta[01;32masafe@asafe-thinkpad[00m:[01;34m~/Documents/git/ProgConcorrente/exercicio2/resposta[00m$ coe[Kde [K[K[K[K[Knvim code [K[K [Ke[K[K[K[Kscript.sh 
+[?2004l[?1049h[22;0;0t[22;0t[?1h=[H[2J]11;?[?2004h[?u[c[?25h[?25l(B[m[H[2J[>4;2m[93m  1 (B[m[96m#!/bin/bash(B[m[K
+[93m  2 (B[m[K
+[93m  3 (B[m[96m# Configurações(B[m[K
+[93m  4 (B[0;1m[96mEXECUTAVEL(B[m=./primos[K
+[93m  5 (B[0;1m[96mNUMEROS(B[m=[95m1000000(B[m         [96m# Quantidade fixa de números(B[m[K
+[93m  6 (B[0;1m[96mRODADAS(B[m=[95m1000(B[m[K
+[93m  7 (B[0;1m[96mCSV(B[m=[93m"(B[m[95mresultados.csv(B[m[93m"(B[m[K
+[93m  8 (B[m[K
+[93m  9 (B[m[96m# Cabeçalho do CSV(B[m[K
+[93m 10 echo(B[m[95m (B[m[93m"(B[m[95mthreads,execucao,tempo(B[m[93m"(B[m[95m (B[m[93m>(B[m [38;5;81m$CSV(B[m[K
+[93m 11 (B[m[K
+[93m 12 (B[m[96m# Loop para potências de 2: 2^0 até 2^3 (ou seja: 1, 2, 4(B[m[93m    (B[m[96m, 8)(B[m[K
+[93m 13 for ((exp=(B[m[95m0(B[m[93m; exp<=(B[m[95m3(B[m[93m; exp++))(B[m; [93mdo(B[m[K
+[93m 14 (B[m  (B[0;1m[96mthreads(B[m=[38;5;81m$(((B[m[95m2(B[m[38;5;224m**exp(B[m[38;5;81m))(B[m[K
+[93m 15 (B[m  [93mecho(B[m[95m (B[m[93m"(B[m[95mExecutando para (B[m[38;5;81m$threads(B[m[95m threads...(B[m[93m"(B[m[K
+[93m 16 (B[m  [K
+[93m 17 (B[m  [93mfor ((i=(B[m[95m1(B[m[93m; i<=RODADAS; i++));(B[m [93mdo(B[m[K
+[93m 18 (B[m    (B[0;1m[96mTEMPO(B[m=[38;5;81m$($EXECUTAVEL(B[m[38;5;224m (B[m[38;5;81m$NUMEROS(B[m[38;5;224m (B[m[38;5;81m$threads)(B[m[K
+[93m 19 (B[m    [93mecho(B[m[95m (B[m[93m"(B[m[38;5;81m$threads(B[m[95m,(B[m[38;5;81m$i(B[m[95m,(B[m[38;5;81m$TEMPO(B[m[93m"(B[m[95m (B[m[93m>>(B[m [38;5;81m$CSV(B[m[K
+[93m 20 (B[m  [93mdone(B[m[K
+[93m 21 done(B[m[K
+[93m 22 (B[m[K
+[93m 23 echo(B[m[95m (B[m[93m"(B[m[95mExecuções completas. Resultados salvos em (B[m[38;5;81m$CSV(B[m[95m.(B[m[93m"(B[m[K
+[93m 24 (B[m[K
+[94m~[K
+~[K
+~[K
+~[K
+~[K
+~[K
+~[K
+~[K
+~[K
+~[K
+~[K
+~[K
+~[K
+~[K
+~[K
+~[K
+~[K
+~[K
+~[K
+~[K
+(B[0;1;7mscript.sh                                  1,1            All]112[2 q]112[2 q[1;5H[?25h[?25l[H(B[m[38;5;130m  1 (B[m[34m#!/bin/bash
+(B[m[38;5;130m  2 
+  3 (B[m[34m# Configurações
+(B[m[38;5;130m  4 (B[m[36mEXECUTAVEL
+(B[m[38;5;130m  5 (B[m[36mNUMEROS(B[m=[31m1000000(B[m         [34m# Quantidade fixa de números
+(B[m[38;5;130m  6 (B[m[36mRODADAS(B[m=[31m1000
+(B[m[38;5;130m  7 (B[m[36mCSV(B[m=[38;5;130m"(B[m[31mresultados.csv(B[m[38;5;130m"
+  8 
+  9 (B[m[34m# Cabeçalho do CSV
+(B[m[38;5;130m 10 echo(B[m[31m (B[m[38;5;130m"(B[m[31mthreads,execucao,tempo(B[m[38;5;130m"(B[m[31m (B[m[38;5;130m>(B[m [35m$CSV
+(B[m[38;5;130m 11 
+ 12 (B[m[34m# Loop para potências de 2: 2^0 até 2^3 (ou seja: 1, 2, 4(B[m[38;5;130m    (B[m[34m, 8)
+(B[m[38;5;130m 13 for ((exp=(B[m[31m0(B[m[38;5;130m; exp<=(B[m[31m3(B[m[38;5;130m; exp++))(B[m; [38;5;130mdo
+ 14 (B[m  [36mthreads(B[m=[35m$(((B[m[31m2(B[m[35m**exp))
+(B[m[38;5;130m 15 (B[m  [38;5;130mecho(B[m[31m (B[m[38;5;130m"(B[m[31mExecutando para (B[m[35m$threads(B[m[31m threads...(B[m[38;5;130m"
+ 16 
+ 17 (B[m  [38;5;130mfor ((i=(B[m[31m1(B[m[38;5;130m; i<=RODADAS; i++));(B[m [38;5;130mdo
+ 18 (B[m    [36mTEMPO(B[m=[35m$($EXECUTAVEL $NUMEROS $threads)
+(B[m[38;5;130m 19 (B[m    [38;5;130mecho(B[m[31m (B[m[38;5;130m"(B[m[35m$threads(B[m[31m,(B[m[35m$i(B[m[31m,(B[m[35m$TEMPO(B[m[38;5;130m"(B[m[31m (B[m[38;5;130m>>(B[m [35m$CSV
+(B[m[38;5;130m 20 (B[m  [38;5;130mdone
+ 21 done
+ 22 
+ 23 echo(B[m[31m (B[m[38;5;130m"(B[m[31mExecuções completas. Resultados salvos em (B[m[35m$CSV(B[m[31m.(B[m[38;5;130m"
+ 24 [24A[?25h[?25l[?1004h[?25h[?25l[47;51H(B[m~@k       [1;5H[?25h[?25l[47;51H   [46;44H(B[0;1;7m2,0-1[2;5H[?25h[?25l[47;51H(B[m~@k[2;5H[?25h[?25l[47;51H   [46;44H(B[0;1;7m3,1  [3;5H[?25h[?25l[47;51H(B[m~@k[3;5H[?25h[?25l[47;51H   [46;44H(B[0;1;7m4[4;5H[?25h[?25l[47;51H(B[m~@k[4;5H[?25h[?25l[47;51H   [46;44H(B[0;1;7m5[5;5H[?25h[?25l[47;51H(B[m~@k[5;5H[?25h[?25l[47;51H   [46;46H(B[0;1;7m2[5;6H[?25h[?25l[47;51H(B[m~@k[5;6H[?25h[?25l[47;51H   [46;46H(B[0;1;7m3[5;7H[?25h[?25l[47;51H(B[m~@k[5;7H[?25h[?25l[47;51H   [46;46H(B[0;1;7m4[5;8H[?25h[?25l[47;51H(B[m~@k[5;8H[?25h[?25l[47;51H   [46;46H(B[0;1;7m5[5;9H[?25h[?25l[47;51H(B[m~@k[5;9H[?25h[?25l[47;51H   [46;46H(B[0;1;7m6[5;10H[?25h[?25l[47;51H(B[m~@k[5;10H[?25h[?25l[47;51H   [46;46H(B[0;1;7m7[5;11H[?25h[?25l[47;51H(B[m~@k[5;11H[?25h[?25l[47;51H   [46;46H(B[0;1;7m8[5;12H[?25h[?25l[47;51H(B[m~@k[5;12H[?25h[?25l[47;51H   [46;46H(B[0;1;7m9[5;13H[?25h[?25l[47;51H(B[m~@k[5;13H[?25h[?25l[47;51H   [46;46H(B[0;1;7m10[5;14H[?25h[?25l[47;51H(B[m~@k[5;14H[?25h[?25l[47;51H   [46;47H(B[0;1;7m1[5;15H[?25h[?25l[47;51H(B[m~@k[5;15H[?25h[?25l[47;51H   [46;47H(B[0;1;7m2[5;16H[?25h[?25l[47;51H(B[m~@k[5;16H[?25h[?25l[47;51H   [46;47H(B[0;1;7m3[5;17H[?25h[?25l[47;51H(B[m~@k[5;17H[?25h[?25l[47;51H   [46;47H(B[0;1;7m4[5;18H[?25h[?25l[47;51H(B[m~@k[5;18H[?25h[?25l[47;51H   [46;47H(B[0;1;7m5[5;19H[?25h[?25l[47;51H(B[m~@k[5;19H[?25h[?25l[47;51H   [46;47H(B[0;1;7m6[5;20H[?25h[?25l[47;51H(B[m~@k[5;20H[?25h[?25l[47;51H   [46;47H(B[0;1
