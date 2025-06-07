@@ -100,15 +100,16 @@ matR novoVertice(int totalVertices, matR adjacencia) {
 std::vector<long long> bellman(int origem, int totalVertices, std::vector<std::vector<long long>>& arestas) {
     std::vector<long long> distancia(totalVertices, 0);
     for (int i = 1; i <= totalVertices; i++) {
-        for (std::vector<long long> atual: arestas) {
+        for (std::vector<long long>& atual: arestas) {
             ll u = atual[0], v = atual[1], peso = atual[2];
             if (distancia[v] > distancia[u] + peso) {
                 distancia[v] = distancia[u] + peso;
             }
         }
+        printf("i = %d bellman\n", i);
     }
 
-    for (std::vector<long long> atual: arestas) {
+    for (std::vector<long long>& atual: arestas) {
         ll u = atual[0], v = atual[1], peso = atual[2];
         if (distancia[v] > distancia[u] + peso) {
             return std::vector<ll> (totalVertices, INT_MIN);
@@ -117,12 +118,12 @@ std::vector<long long> bellman(int origem, int totalVertices, std::vector<std::v
     return distancia;
 }
 
-matR gerarMatrz(int totalArestas, matR arestas, std::vector<ll> pesos, int totalVertices, int oposto) {
+matR gerarMatrz(int totalArestas, matR arestas, std::vector<ll> pesos, int totalVertices) {
 
     matR matrizGrafo = matR (totalVertices + 1, std::vector<ll> (totalVertices + 1, INT_MAX));
-    for (std::vector<ll> atual: arestas) {
+    for (std::vector<ll>& atual: arestas) {
         int u = atual[0], v = atual[1], p = atual[2];
-        p = p + (pesos[u] - pesos[v]) * oposto;
+        p = p + (pesos[u] - pesos[v]);
         matrizGrafo[u][v] = p;
         // printf(" u = %d, v =  %d, p = %d\n", u , v, p);
     }
@@ -157,7 +158,7 @@ int main() {
     
     distanciasFalsas = bellman(0, totalVertices + 1, novaAdjacencia);
 
-    matrizDoGrafo = gerarMatrz(totalArestas, adjacenciaOriginal, distanciasFalsas, totalVertices, 1);
+    matrizDoGrafo = gerarMatrz(totalArestas, adjacenciaOriginal, distanciasFalsas, totalVertices);
 
 
     proximoVertice = totalVertices;
