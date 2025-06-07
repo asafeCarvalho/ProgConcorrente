@@ -106,7 +106,7 @@ std::vector<long long> bellman(int origem, int totalVertices, std::vector<std::v
                 distancia[v] = distancia[u] + peso;
             }
         }
-        printf("i = %d bellman\n", i);
+        // printf("i = %d bellman\n", i);
     }
 
     for (std::vector<long long>& atual: arestas) {
