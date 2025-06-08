@@ -43,21 +43,21 @@ std::vector<std::vector<long long>> lerInput(int totalVertices, int totalArestas
 
 long long* dijkstra(int origem) {
     std::priority_queue<std::pair<long long int,int>, std::vector<std::pair<long long int,int>>, std::greater<std::pair<long long int,int>> > fila;
-    ll* distancia = (ll *) Malloc(sizeof(ll) * totalVertices + 1);
-    for (int i = 0; i <= totalVertices; i++) distancia[i] = INT_MAX;
+    // ll* distancia = (ll *) Malloc(sizeof(ll) * totalVertices + 1);
+    for (int i = 0; i <= totalVertices; i++) distanciasFinais[origem][i] = INT_MAX;
     fila.push({0, origem});
     while (!fila.empty()) {
         std::pair<long long int,int> topo = fila.top();
         long long int peso =  topo.first, v = topo.second;
         fila.pop();
-        if (distancia[v] != INT_MAX) continue;
-        distancia[v] = peso;
+        if (distanciasFinais[origem][v] != INT_MAX) continue;
+        distanciasFinais[origem][v] = peso;
         for (int i = 1; i <= totalVertices; i++) {
-            if (matrizDoGrafo[v][i] == INT_MAX) continue;
+            if (matrizDoGrafo[v][i] == INT_MAX || distanciasFinais[origem][v] != INT_MAX) continue;
             fila.push({peso + matrizDoGrafo[v][i], i});
         }
     }
-    return distancia;
+    return NULL;
 }
 
 void* thread_task(void* args) {
@@ -72,18 +72,11 @@ void* thread_task(void* args) {
         }
         proximoVertice--;
         pthread_mutex_unlock(&mutex);
-        ll* distancias_origem =  dijkstra(origem);
-        // pthread_mutex_lock(&mutex);
-        distanciasFinais[origem] = distancias_origem;
-        // for (int i = 1; i <= totalVertices; i++) {
-        //         std::cout << (distancias_origem[i] == INT_MAX ? "\u221E" : std::to_string( distancias_origem[i] + distanciasFalsas[i] - distanciasFalsas[origem]) ) + "" << " ";
 
-        // }
-        // pthread_mutex_unlock(&mutex);
-        // printf("id = %ld, origem = %d\n", id, origem);
-
+        // ll* distancias_origem =  dijkstra(origem);
+        // distanciasFinais[origem] = distancias_origem;
     }
-
+    pthread_exit(0);
     return (void *) 0;
 
 }
@@ -118,7 +111,7 @@ std::vector<long long> bellman(int origem, int totalVertices, std::vector<std::v
     return distancia;
 }
 
-matR gerarMatrz(int totalArestas, matR arestas, std::vector<ll> pesos, int totalVertices) {
+matR gerarMatriz(int totalArestas, matR arestas, std::vector<ll> pesos, int totalVertices) {
 
     matR matrizGrafo = matR (totalVertices + 1, std::vector<ll> (totalVertices + 1, INT_MAX));
     for (std::vector<ll>& atual: arestas) {
@@ -152,13 +145,16 @@ int main() {
     int totalArestas;
     scanf("%d %d\n", &totalVertices, &totalArestas);
     distanciasFinais = (ll**) Malloc(sizeof(ll*) * (totalVertices + 1));
+    for (int i = 1; i <= totalVertices; i++) {
+        distanciasFinais[i] = (ll*) Malloc(sizeof(ll) * (totalVertices + 1));
+    }
     matR adjacenciaOriginal = lerInput(totalVertices, totalArestas);
 
     matR novaAdjacencia = novoVertice(totalVertices, adjacenciaOriginal);    
     
     distanciasFalsas = bellman(0, totalVertices + 1, novaAdjacencia);
 
-    matrizDoGrafo = gerarMatrz(totalArestas, adjacenciaOriginal, distanciasFalsas, totalVertices);
+    matrizDoGrafo = gerarMatriz(totalArestas, adjacenciaOriginal, distanciasFalsas, totalVertices);
 
 
     proximoVertice = totalVertices;
@@ -190,7 +186,6 @@ int main() {
 
     for (int i = 1; i <= totalVertices; i++) {
         for (int j = 1; j <= totalVertices; j++) {
-            // std::cout << (matrizDoGrafo[i][j] == INT_MAX ? "\u221E" : std::to_string(matrizDoGrafo[i][j] )) + "" << " ";
             std::cout << (distanciasFinais[i][j] == INT_MAX ? "\u221E" : std::to_string( distanciasFinais[i][j] + distanciasFalsas[j] - distanciasFalsas[i]) ) + "" << " ";
         }
         printf("\n");
