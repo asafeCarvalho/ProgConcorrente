@@ -50,11 +50,14 @@ long long* dijkstra(int origem) {
         std::pair<long long int,int> topo = fila.top();
         long long int peso =  topo.first, v = topo.second;
         fila.pop();
-        if (distanciasFinais[origem][v] != INT_MAX) continue;
+        if (distanciasFinais[origem][v] < peso) continue;
         distanciasFinais[origem][v] = peso;
         for (int i = 1; i <= totalVertices; i++) {
-            if (matrizDoGrafo[v][i] == INT_MAX || distanciasFinais[origem][v] != INT_MAX) continue;
-            fila.push({peso + matrizDoGrafo[v][i], i});
+            if (matrizDoGrafo[v][i] == INT_MAX) continue;
+            if (distanciasFinais[origem][i] > matrizDoGrafo[v][i] + peso){
+                fila.push({peso + matrizDoGrafo[v][i], i});
+                distanciasFinais[origem][i] = matrizDoGrafo[v][i] + peso;
+            }
         }
     }
     return NULL;
@@ -63,6 +66,7 @@ long long* dijkstra(int origem) {
 void* thread_task(void* args) {
     ll id = (ll) args;
     int origem;
+    
     while (1) {
         pthread_mutex_lock(&mutex);
         origem = proximoVertice;
@@ -73,8 +77,7 @@ void* thread_task(void* args) {
         proximoVertice--;
         pthread_mutex_unlock(&mutex);
 
-        // ll* distancias_origem =  dijkstra(origem);
-        // distanciasFinais[origem] = distancias_origem;
+        dijkstra(origem);
     }
     pthread_exit(0);
     return (void *) 0;
