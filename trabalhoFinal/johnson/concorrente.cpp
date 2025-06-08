@@ -170,7 +170,7 @@ int main() {
 
 
 
-    numThtreads = 2;
+    numThtreads = 1;
     proximoVertice = totalVertices;
 
     pthread_t tids[numThtreads];
