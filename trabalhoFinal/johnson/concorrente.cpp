@@ -82,27 +82,6 @@ long long* dijkstra(int origem) {
     return NULL;
 }
 
-void* thread_task(void* args) {
-    ll id = (ll) args;
-    int origem;
-    
-    while (1) {
-        pthread_mutex_lock(&mutex);
-        origem = proximoVertice;
-        if (origem == 0) {
-            pthread_mutex_unlock(&mutex);
-            break;
-        }
-        proximoVertice--;
-        pthread_mutex_unlock(&mutex);
-        dijkstra(origem);
-        // printf("id %ld, origem %d\n\n" ,id, origem);
-
-    }
-    pthread_exit(0);
-    return (void *) 0;
-
-}
 
 matR novoVertice() {
 
@@ -160,15 +139,29 @@ std::vector<long long> bellman() {
 
 }
 
-void printarMatriz(std::vector<std::vector<long long>>& distancias, int totalVertices) {
-    for (int i = 1; i <= totalVertices; i++) {
-        for (int j = 1; j <= totalVertices; j++) {
-            std::cout << (distancias[i][j] == INT_MAX ? "\u221E" : std::to_string(distancias[i][j])) + "" << " ";
+
+void* thread_task(void* args) {
+    ll id = (ll) args;
+    int origem;
+    
+    while (1) {
+        pthread_mutex_lock(&mutex);
+        origem = proximoVertice;
+        if (origem == 0) {
+            pthread_mutex_unlock(&mutex);
+            break;
         }
-        printf("\n");
+        proximoVertice--;
+        pthread_mutex_unlock(&mutex);
+        dijkstra(origem);
+        // printf("id %ld, origem %d\n\n" ,id, origem);
+
     }
-    printf("\n\n");
+    pthread_exit(0);
+    return (void *) 0;
+
 }
+
 
 
 int main(int argc, char** argv) {
