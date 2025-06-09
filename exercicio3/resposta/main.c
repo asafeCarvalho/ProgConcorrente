@@ -58,29 +58,21 @@ void * consumidor(void* args) {
     while (buffer[out] != N + 1) {
         int numeroAtual;
 
-        // printf("\nCHEIO id %ld --- num = %d\n", id, buffer[out]);
-        // if (buffer[out] == N + 1) {
-        //     break;
-        // }
         sem_wait(&cheio);
         pthread_mutex_lock(&mutex);
-        if (buffer[out] == N + 1) {
+
+        numeroAtual = buffer[out];
+        if (numeroAtual == N + 1) {
             pthread_mutex_unlock(&mutex);
             break;
         }
 
-        numeroAtual = buffer[out];
         out = (out + 1) % M;
         sem_post(&vazio);
         pthread_mutex_unlock(&mutex);
 
-        // printf("id: %ld || fazendo >%d<\n", id, numeroAtual);
         totalDePrimos += ehPrimo(numeroAtual);
         if (numeroAtual == N) {
-            //threads eperando por numeros que nao existem;
-            // printf("locked mutex\n\n");
-            // printf("got mutex\n\n");
-            // printf("ultimo: %d\n", numeroAtual);
             buffer[out] = N + 1;
 
             for (int i = 0; i <= C + 1; i++) {
