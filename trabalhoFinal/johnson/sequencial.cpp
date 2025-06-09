@@ -50,7 +50,7 @@ void lerInput(FILE* arq) {
 
 
 void dijkstra(int origem) {
-    // if (origem % 1024 == 0) std::cout << "origem " << origem << "\n";
+    if (origem % 1024 == 0) std::cout << "origem " << origem << "\n";
 
     std::priority_queue<std::pair<long long int,int>, std::vector<std::pair<long long int,int>>, std::greater<std::pair<long long int,int>> > fila;
 
