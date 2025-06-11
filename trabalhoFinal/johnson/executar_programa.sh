@@ -2,7 +2,7 @@
 
 bash compilar.sh
 
-EXECUTAVEL=./conc
+EXECUTAVEL=./concorrente
 
 
 
