@@ -1,0 +1,12 @@
+
+--- Generating a single random directed weighted graph ---
+Number of vertices: 6, Directed: True
+Edges (source, destination, weight):
+(1, 5, 40)
+(2, 3, 33)
+(2, 5, 77)
+(3, 5, 30)
+(3, 4, 22)
+(5, 6, 59)
+(6, 2, 94)
+(6, 1, 52)
