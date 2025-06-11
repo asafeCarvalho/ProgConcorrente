@@ -42,7 +42,6 @@ void lerInput(FILE* arq) {
         fscanf(arq, "%d %d %d\n", &u, &v, &peso);
         ll* aresta = (ll*) Malloc(sizeof(ll) * 2);
         aresta[0] = v; aresta[1] = peso;
-
         adjacencia[u].push_back(aresta);
     }
 }
@@ -71,13 +70,6 @@ void dijkstra(int origem) {
             }
         }
     }
-    // std::cout << "\n";
-    // std::string output = "origem " + std::to_string(origem) + " ";
-    // for (int i = 1; i <= totalVertices; i++) {
-    //     // std::cout << distancia[i] + (distanciasFalsas[i] - distanciasFalsas[origem]) << " ";
-    //     output += (distancia[i] == LLONG_MAX ? "\u221E" : std::to_string( distancia[i] + distanciasFalsas[i] - distanciasFalsas[origem]) ) + " ";
-    // }
-    // std::cout << output <<  "\n";
     free(distancia);
 }
 
@@ -151,17 +143,23 @@ int main(int argc, char** argv) {
 
     if (arq == NULL) exitar_erro((char*) "erro ao abrir arquivo\n");
 
-    // return 0;
 
 
     fscanf(arq, "%d %d\n", &totalVertices, &totalArestas);
 
     adjacencia = std::vector< std::vector<ll*> > (totalVertices + 1, std::vector<ll*> {});
+    printf("lendo arquivo\n");
     lerInput(arq);
+    printf("adicionando novo vertice\n");
     novoVertice();
-
+    printf("executando bellman\n");
     distanciasFalsas = std::vector<ll> (totalVertices + 1, 0);
-    // distanciasFalsas = bellman();
+    distanciasFalsas = bellman();
+    printf("fim do bellman\n");
+    if (distanciasFalsas[0] < 0) exitar_erro((char*) "Não é possível encontrar o menores caminhos pois existe um ciclo negativo\n");
+    for (auto atual: distanciasFalsas) std::cout << atual << "\n";
+
+    return 0;
 
     adjacenciaRebalanceada = novaAdjacencia();
     proximoVertice = totalVertices;

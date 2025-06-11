@@ -1,11 +1,14 @@
 #include <bits/stdc++.h>
 #include "timer.h"
+#include <semaphore.h>
 
 
 typedef std::vector<std::vector<long long*>> matR;
 typedef long long ll;
 
 pthread_mutex_t mutex;
+pthread_mutex_t mutex_inserir;
+sem_t inserir;
 
 ll totalVertices;
 ll totalArestas;
@@ -19,6 +22,21 @@ std::vector<std::vector<ll*>> adjacenciaRebalanceada;
 
 std::vector<ll> distanciasFalsas;
 int numThtreads;
+
+class minhaComparacao
+{
+  bool reverse;
+public:
+  minhaComparacao(const bool& revparam=false)
+    {reverse=revparam;}
+  bool operator() ( long long*& lhs, long long*&rhs)
+  {
+    if (reverse) return ((*lhs)<(*rhs));
+    else return ((*lhs)>(*rhs));
+  }
+};
+
+std::priority_queue<long long*, std::vector<long long* >, minhaComparacao> fila_output;
 
 
 void exitar_erro(char* msg) {
@@ -42,6 +60,7 @@ void lerInput(FILE* arq) {
         fscanf(arq, "%d %d %d\n", &u, &v, &peso);
         ll* aresta = (ll*) Malloc(sizeof(ll) * 2);
         aresta[0] = v; aresta[1] = peso;
+        // printf("%d %d %d", u,v, peso);
 
         adjacencia[u].push_back(aresta);
     }
@@ -50,7 +69,7 @@ void lerInput(FILE* arq) {
 
 
 long long* dijkstra(int origem) {
-    // std::cout << "origem " << origem << "\n";
+    // std::cout << "INCIO origem " << origem << "\n";
 
     std::priority_queue<std::pair<long long int,int>, std::vector<std::pair<long long int,int>>, std::greater<std::pair<long long int,int>> > fila;
 
@@ -74,12 +93,14 @@ long long* dijkstra(int origem) {
     // std::cout << "\n";
     // std::string output = "origem " + std::to_string(origem) + " ";
     // for (int i = 1; i <= totalVertices; i++) {
-    //     // std::cout << distancia[i] + (distanciasFalsas[i] - distanciasFalsas[origem]) << " ";
     //     output += (distancia[i] == LLONG_MAX ? "\u221E" : std::to_string( distancia[i] + distanciasFalsas[i] - distanciasFalsas[origem]) ) + " ";
     // }
     // std::cout << output <<  "\n";
-    free(distancia);
-    return NULL;
+    // free(distancia);
+    distancia[0] = origem;
+    // std::cout << "FIMMM origem " << origem << "\n";
+
+    return distancia;
 }
 
 
@@ -147,22 +168,47 @@ void* thread_task(void* args) {
     while (1) {
         pthread_mutex_lock(&mutex);
         origem = proximoVertice;
-        if (origem == 0) {
+        if (origem > totalVertices) {
             pthread_mutex_unlock(&mutex);
             break;
         }
-        proximoVertice--;
+        proximoVertice++;
         pthread_mutex_unlock(&mutex);
-        dijkstra(origem);
-        // printf("id %ld, origem %d\n\n" ,id, origem);
-
+        ll* resultado = dijkstra(origem);
+        pthread_mutex_lock(&mutex_inserir);
+        fila_output.push(resultado);
+        pthread_mutex_unlock(&mutex_inserir);
+        sem_post(&inserir);
     }
     pthread_exit(0);
     return (void *) 0;
 
 }
 
-
+void* printar(void* args) {
+    int atual = 1;
+    ll* distancia = 0;
+    while (atual <= totalVertices) {
+        pthread_mutex_lock(&mutex_inserir);
+        while (fila_output.empty() || *(fila_output.top()) != atual) {
+            // std::cout << "vida belaa " << atual << "\n" ;
+            pthread_mutex_unlock(&mutex_inserir);
+            sem_wait(&inserir);
+            pthread_mutex_lock(&mutex_inserir);
+        }
+        distancia = fila_output.top();
+        fila_output.pop();
+        pthread_mutex_unlock(&mutex_inserir);
+        for (int i = 1; i <= totalVertices; i++) {
+            std::cout << (distancia[i] == LLONG_MAX ? "\u221E" : std::to_string( distancia[i] + distanciasFalsas[i] - distanciasFalsas[distancia[0]]) ) + " ";
+        }
+        printf("\n");
+        free(distancia);
+        distancia = 0;
+        atual++;
+    }
+    return 0;
+}
 
 int main(int argc, char** argv) {
 
@@ -187,20 +233,24 @@ int main(int argc, char** argv) {
     adjacencia = std::vector< std::vector<ll*> > (totalVertices + 1, std::vector<ll*> {});
     lerInput(arq);
     novoVertice();
-
     distanciasFalsas = std::vector<ll> (totalVertices + 1, 0);
     // distanciasFalsas = bellman();
+    if (distanciasFalsas[0] < 0) exitar_erro((char*) "Não é possível encontrar o menores caminhos pois existe um ciclo negativo\n");
 
     adjacenciaRebalanceada = novaAdjacencia();
-    proximoVertice = totalVertices;
+    proximoVertice = 1;
+
 
 
     double inicio, fim, delta, total = 0;
     GET_TIME(inicio);
 
     pthread_mutex_init(&mutex, NULL);
+    pthread_mutex_init(&mutex_inserir, NULL);
+    sem_init(&inserir, 0, 0);
     pthread_t tids[numThtreads];
-
+    pthread_t consumidora;
+    if (pthread_create(&consumidora, NULL, printar, 0)) exitar_erro((char *) "!erro ao criar thread consumidora!\n");
     for (long long i = 0; i < numThtreads; i++) {
         if (pthread_create(&tids[i], NULL, thread_task, (void*) i)) {
             exitar_erro((char *) "!erro ao criar thread!\n");
@@ -212,10 +262,12 @@ int main(int argc, char** argv) {
             exitar_erro((char *) "erro ao dar join na thread");
         }
     }
+    if (pthread_join(consumidora, 0)) exitar_erro((char *) "erro ao dar join na thread");
     pthread_mutex_destroy(&mutex);
+    pthread_mutex_destroy(&mutex_inserir);
     GET_TIME(fim);
 
-
+    
     printf("%.6f\n", fim - inicio);
 
 
